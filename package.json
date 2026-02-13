@@ -1,0 +1,21 @@
+{
+  "name": "trmnl-baywheels",
+  "version": "1.0.0",
+  "description": "TRMNL integration for BayWheels bike share status",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": {
+    "dev": "node src/server.mjs",
+    "test": "node src/index.mjs",
+    "start": "node src/server.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["trmnl", "baywheels", "bikeshare", "gbfs"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

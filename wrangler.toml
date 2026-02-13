@@ -1,0 +1,20 @@
+name = "trmnl-baywheels"
+main = "src/cloudflare-worker.mjs"
+compatibility_date = "2024-01-01"
+
+# Account details - you'll need to fill these in
+# account_id = "your-account-id"
+# workers_dev = true
+
+# Environment Variables
+# Set these to your station details before deploying
+# Find your station at: https://gbfs.lyft.com/gbfs/2.3/bay/en/station_information.json
+[vars]
+STATION_ID = "your-station-id-here"
+STATION_SHORT_NAME = "SF-XXX-X"
+GBFS_BASE_URL = "https://gbfs.lyft.com/gbfs/2.3/bay/en"
+
+# Routes (optional, for custom domains)
+# routes = [
+#   { pattern = "baywheels.yourdomain.com/*", zone_name = "yourdomain.com" }
+# ]

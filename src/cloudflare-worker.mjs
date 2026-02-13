@@ -31,14 +31,12 @@ export default {
     }
 
     try {
-      // Pass Cloudflare Workers env variables to handler
-      // In Cloudflare Workers, env vars are in the env object
-      if (env.STATION_ID) process.env.STATION_ID = env.STATION_ID;
-      if (env.STATION_SHORT_NAME) process.env.STATION_SHORT_NAME = env.STATION_SHORT_NAME;
-      if (env.GBFS_BASE_URL) process.env.GBFS_BASE_URL = env.GBFS_BASE_URL;
-      process.env.NODE_ENV = 'production';
-
-      const result = await handleRequest();
+      // Pass Cloudflare Workers env directly to handler
+      const result = await handleRequest({
+        STATION_ID: env.STATION_ID,
+        STATION_SHORT_NAME: env.STATION_SHORT_NAME,
+        GBFS_BASE_URL: env.GBFS_BASE_URL,
+      });
 
       return new Response(JSON.stringify(result), {
         status: 200,

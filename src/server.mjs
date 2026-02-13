@@ -3,9 +3,20 @@
  */
 
 import { createServer } from 'http';
+import { config } from 'dotenv';
 import { handleRequest } from './index.mjs';
 
+// Load environment variables from .env
+config();
+
 const PORT = process.env.PORT || 3000;
+
+// Get config from environment
+const appConfig = {
+  STATION_ID: process.env.STATION_ID,
+  STATION_SHORT_NAME: process.env.STATION_SHORT_NAME,
+  GBFS_BASE_URL: process.env.GBFS_BASE_URL,
+};
 
 const server = createServer(async (req, res) => {
   // Set CORS headers
@@ -30,7 +41,7 @@ const server = createServer(async (req, res) => {
   try {
     console.log(`${req.method} ${req.url} - Fetching BayWheels data...`);
 
-    const result = await handleRequest();
+    const result = await handleRequest(appConfig);
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(result, null, 2));
@@ -48,7 +59,7 @@ const server = createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n🚴 BayWheels TRMNL Integration Dev Server`);
-  console.log(`📍 Station: ${process.env.STATION_SHORT_NAME || 'Not configured'}`);
+  console.log(`📍 Station: ${appConfig.STATION_SHORT_NAME || 'Not configured'}`);
   console.log(`🌐 Server running at http://localhost:${PORT}`);
   console.log(`\nTest it with: curl http://localhost:${PORT}\n`);
 });

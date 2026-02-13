@@ -6,8 +6,9 @@
   "main": "src/index.mjs",
   "scripts": {
     "dev": "node src/server.mjs",
-    "test": "node src/index.mjs",
-    "start": "node src/server.mjs"
+    "test": "node src/cli.mjs",
+    "start": "node src/server.mjs",
+    "deploy": "bash -c 'source .env.prod && wrangler deploy --var STATION_ID:$STATION_ID --var STATION_SHORT_NAME:$STATION_SHORT_NAME --var GBFS_BASE_URL:$GBFS_BASE_URL'"
   },
   "engines": {
     "node": ">=18.0.0"

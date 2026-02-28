@@ -4,6 +4,7 @@
  */
 
 const DEFAULT_GBFS_BASE_URL = 'https://gbfs.lyft.com/gbfs/2.3/bay/en';
+const DISPLAY_TIMEZONE = 'America/Los_Angeles';
 
 /**
  * Fetch station information (static data like name, location)
@@ -35,7 +36,8 @@ function formatTime(timestamp) {
   return date.toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true
+    hour12: true,
+    timeZone: DISPLAY_TIMEZONE
   });
 }
 

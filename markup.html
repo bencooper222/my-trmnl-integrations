@@ -1,32 +1,35 @@
-<div class="layout layout--col gap--medium" style="padding-top: 8px;">
+<div class="layout layout--col gap--small">
   {% for station in stations %}
-  <div class="grid grid--cols-12 gap--small">
-    <div class="col col--span-4">
-      <div class="item">
-        <div class="content">
-          <div class="label">{{ station.name }}</div>
-        </div>
-      </div>
+  <div style="width:100%">
+    <div style="display:flex;align-items:flex-start;width:100%">
+      <div style="flex:0 0 38%" class="label">{{ station.name }}</div>
+      <div style="flex:1;text-align:center"><span class="value value--xlarge" style="display:block;line-height:1">{{ station.bikes_available }}</span></div>
+      <div style="flex:1;text-align:center"><span class="value value--xlarge" style="display:block;line-height:1">{{ station.ebikes_available }}</span></div>
     </div>
-
-    <div class="col col--span-4">
-      <div class="item bg--dither-1">
-        <div class="content text--center">
-          <span class="value value--xxlarge">{{ station.bikes_available }}</span>
-          <span class="label">Bikes</span>
-        </div>
+    <div style="display:flex;align-items:center;width:100%">
+      <div style="flex:0 0 38%"></div>
+      <div style="flex:1;display:flex;justify-content:center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="28" height="28">
+          <g stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <circle cx="25" cy="70" r="14"/>
+            <circle cx="75" cy="70" r="14"/>
+            <polygon points="25,70 45,70 65,45 35,45"/>
+            <line x1="45" y1="70" x2="33" y2="35"/>
+            <line x1="75" y1="70" x2="63" y2="35"/>
+            <path d="M 23 33 Q 33 29 41 34" stroke-width="7"/>
+            <path d="M 55 34 Q 63 29 73 33" stroke-width="7"/>
+          </g>
+          <circle cx="45" cy="70" r="4" fill="currentColor"/>
+        </svg>
       </div>
-    </div>
-
-    <div class="col col--span-4">
-      <div class="item bg--dither-1">
-        <div class="content text--center">
-          <span class="value value--xxlarge">{{ station.ebikes_available }}</span>
-          <span class="label">eBikes</span>
-        </div>
+      <div style="flex:1;display:flex;justify-content:center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+        </svg>
       </div>
     </div>
   </div>
+  {% unless forloop.last %}<div style="height:1em"></div>{% endunless %}
   {% endfor %}
 </div>
 

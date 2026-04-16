@@ -1,6 +1,7 @@
 name = "trmnl-baywheels"
 main = "src/cloudflare-worker.mjs"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
 # Account details - you'll need to fill these in
 # account_id = "your-account-id"

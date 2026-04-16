@@ -12,7 +12,7 @@ export default {
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     };
 
     // Handle CORS preflight
@@ -30,11 +30,20 @@ export default {
       });
     }
 
+    const auth = request.headers.get('Authorization') ?? '';
+    const token = auth.startsWith('Bearer ') ? auth.slice(7) : '';
+    if (token !== env.BEARER_TOKEN) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
+      });
+    }
+
     try {
       // Pass Cloudflare Workers env directly to handler
       const result = await handleRequest({
-        STATION_ID: env.STATION_ID,
-        STATION_SHORT_NAME: env.STATION_SHORT_NAME,
+        STATION_IDS: env.STATION_IDS,
+        STATION_SHORT_NAMES: env.STATION_SHORT_NAMES,
         GBFS_BASE_URL: env.GBFS_BASE_URL,
       });
 

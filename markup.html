@@ -1,0 +1,37 @@
+<div class="layout layout--col gap--medium" style="padding-top: 8px;">
+  {% for station in stations %}
+  <div class="grid grid--cols-12 gap--small">
+    <div class="col col--span-4">
+      <div class="item">
+        <div class="content">
+          <div class="label">{{ station.name }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col--span-4">
+      <div class="item bg--dither-1">
+        <div class="content text--center">
+          <span class="value value--xxlarge">{{ station.bikes_available }}</span>
+          <span class="label">Bikes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col--span-4">
+      <div class="item bg--dither-1">
+        <div class="content text--center">
+          <span class="value value--xxlarge">{{ station.ebikes_available }}</span>
+          <span class="label">eBikes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Title Bar -->
+<div class="title_bar">
+  <span class="title">BayWheels</span>
+  <span class="instance">{{ last_updated }}</span>
+</div>

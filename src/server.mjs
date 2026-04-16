@@ -62,10 +62,12 @@ const server = createServer(async (req, res) => {
   } catch (error) {
     console.error('Error:', error);
     res.writeHead(500, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-      error: 'Internal server error',
-      message: error.message
-    }));
+    res.end(
+      JSON.stringify({
+        error: 'Internal server error',
+        message: error.message,
+      }),
+    );
   }
 });
 

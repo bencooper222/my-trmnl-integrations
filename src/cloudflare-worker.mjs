@@ -18,7 +18,7 @@ export default {
     // Handle CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
-        headers: corsHeaders
+        headers: corsHeaders,
       });
     }
 
@@ -26,7 +26,7 @@ export default {
     if (request.method !== 'GET' && request.method !== 'POST') {
       return new Response('Method not allowed', {
         status: 405,
-        headers: corsHeaders
+        headers: corsHeaders,
       });
     }
 
@@ -35,7 +35,7 @@ export default {
     if (token !== env.BEARER_TOKEN) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
-        headers: { 'Content-Type': 'application/json', ...corsHeaders }
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
       });
     }
 
@@ -51,20 +51,23 @@ export default {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          ...corsHeaders
-        }
+          ...corsHeaders,
+        },
       });
     } catch (error) {
-      return new Response(JSON.stringify({
-        error: 'Internal server error',
-        message: error.message
-      }), {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-          ...corsHeaders
-        }
-      });
+      return new Response(
+        JSON.stringify({
+          error: 'Internal server error',
+          message: error.message,
+        }),
+        {
+          status: 500,
+          headers: {
+            'Content-Type': 'application/json',
+            ...corsHeaders,
+          },
+        },
+      );
     }
-  }
+  },
 };

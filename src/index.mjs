@@ -33,7 +33,7 @@ function formatTime(timestamp) {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-    timeZone: DISPLAY_TIMEZONE
+    timeZone: DISPLAY_TIMEZONE,
   });
 }
 
@@ -46,7 +46,9 @@ function formatTime(timestamp) {
  */
 export async function handleRequest(config) {
   const stationIds = config.STATION_IDS ? config.STATION_IDS.split(',').map(s => s.trim()) : [];
-  const shortNames = config.STATION_SHORT_NAMES ? config.STATION_SHORT_NAMES.split(',').map(s => s.trim()) : [];
+  const shortNames = config.STATION_SHORT_NAMES
+    ? config.STATION_SHORT_NAMES.split(',').map(s => s.trim())
+    : [];
   const baseUrl = config.GBFS_BASE_URL || DEFAULT_GBFS_BASE_URL;
 
   if (stationIds.length === 0 || shortNames.length === 0) {
@@ -56,7 +58,7 @@ export async function handleRequest(config) {
   // Fetch both datasets once, then extract per-station data
   const [allInfo, allStatus] = await Promise.all([
     getAllStationInfo(baseUrl),
-    getAllStationStatus(baseUrl)
+    getAllStationStatus(baseUrl),
   ]);
 
   const stations = stationIds.map((stationId, i) => {
@@ -69,7 +71,7 @@ export async function handleRequest(config) {
         name: 'Unknown',
         bikes_available: '--',
         ebikes_available: '--',
-        last_updated: 'N/A'
+        last_updated: 'N/A',
       };
     }
 
@@ -78,12 +80,12 @@ export async function handleRequest(config) {
       name: info.name,
       bikes_available: status.num_bikes_available,
       ebikes_available: status.num_ebikes_available,
-      last_updated: formatTime(status.last_reported)
+      last_updated: formatTime(status.last_reported),
     };
   });
 
   return {
     stations,
-    last_updated: formatTime(Math.floor(Date.now() / 1000))
+    last_updated: formatTime(Math.floor(Date.now() / 1000)),
   };
 }

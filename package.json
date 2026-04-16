@@ -8,6 +8,7 @@
     "dev": "node src/server.mjs",
     "test": "node src/cli.mjs",
     "start": "node src/server.mjs",
+    "format": "prettier --write src/",
     "deploy": "bash -c 'source .env.prod && wrangler deploy --var STATION_ID:$STATION_ID --var STATION_SHORT_NAME:$STATION_SHORT_NAME --var GBFS_BASE_URL:$GBFS_BASE_URL --var BEARER_TOKEN:$BEARER_TOKEN'"
   },
   "engines": {
@@ -25,6 +26,7 @@
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
+    "prettier": "^3.8.3",
     "wrangler": "^4.47.0"
   }
 }
